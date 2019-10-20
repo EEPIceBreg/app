@@ -33,11 +33,15 @@ public class FetchApi {
         String fileContent= FileUtils.readFileToString(file,"utf-8");
         JSONArray array= JSON.parseArray(fileContent);
         for(int i=0;i<array.size();i++){
-            JSONObject json=array.getJSONObject(i);
-            JSONObject jsonResp = apiFiter.getApiContent(json.getString("url"),json.getString("clientIdKey"),
-                    json.getString("clientId"),json.getString("secretKey"),json.getString("clientSecret"),
-                    json.getString("method"),json.getString("para"));
-            logger.info("response is {}",jsonResp.toString());
+            JSONObject json = array.getJSONObject(i);
+            try {
+                JSONObject jsonResp = apiFiter.getApiContent(json.getString("url"), json.getString("clientIdKey"),
+                        json.getString("clientId"), json.getString("secretKey"), json.getString("clientSecret"),
+                        json.getString("method"), json.getString("para"));
+                logger.info("response is {}", jsonResp.toString());
+            }catch (Exception e){
+                logger.error("fail to fetch API: {}",json.getString("url"));
+            }
         }
         logger.info("batch complete");
     }

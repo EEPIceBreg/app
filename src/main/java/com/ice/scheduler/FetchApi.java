@@ -24,7 +24,7 @@ public class FetchApi {
     @Autowired
     ApiFiter apiFiter;
 
-    @Scheduled(cron = "0 */1 * * * ?")
+    @Scheduled(cron = "0 */30 * * * ?")
     public void processTask() throws IOException {
         logger.info("batch start");
         URL resource = FetchApi.class.getResource("/APISource.json");
@@ -35,12 +35,12 @@ public class FetchApi {
         for(int i=0;i<array.size();i++){
             JSONObject json = array.getJSONObject(i);
             try {
-                JSONObject jsonResp = apiFiter.getApiContent(json.getString("url"), json.getString("clientIdKey"),
+                String jsonResp = apiFiter.getApiContent(json.getString("url"), json.getString("clientIdKey"),
                         json.getString("clientId"), json.getString("secretKey"), json.getString("clientSecret"),
                         json.getString("method"), json.getString("para"));
-                logger.info("response is {}", jsonResp.toString());
+                logger.info("response is {}", jsonResp);
             }catch (Exception e){
-                logger.error("fail to fetch API: {}",json.getString("url"));
+                logger.error("fail to fetch API: {}",json.getString("url"),e);
             }
         }
         logger.info("batch complete");

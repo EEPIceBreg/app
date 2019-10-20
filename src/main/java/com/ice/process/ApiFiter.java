@@ -18,7 +18,7 @@ public class ApiFiter {
 
     private RestTemplate restTemplate=new RestTemplate();
 
-    public JSONObject getApiContent(String strUrl, String clientIdKey, String clientId,
+    public String getApiContent(String strUrl, String clientIdKey, String clientId,
                                     String secretKey, String clientSecret, String method,
                                     String para){
         String responseText;
@@ -36,6 +36,6 @@ public class ApiFiter {
             responseText =restTemplate.exchange(uri.toString(), HttpMethod.GET,httpEntity,String.class).getBody();
         }
         logger.info("complete requesting {}",strUrl);
-        return JSON.parseObject(responseText);
+        return responseText;
     }
 }

@@ -1,6 +1,6 @@
 [
   {
-    "url": "www.baidu.com",
+    "url": "http://www.baidu.com",
     "clientIdKey": "clientId",
     "clientId": "klnsdlfnl",
     "secretKey": "clientSecret",
@@ -9,7 +9,7 @@
     "para": "{'bank':'HSBC'}"
   },
   {
-    "url": "www.baidu.com",
+    "url": "http://www.baidu.com",
     "clientIdKey": "clientId",
     "clientId": "klnsdlfnl",
     "secretKey": "clientSecret",

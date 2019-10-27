@@ -9,6 +9,16 @@ public class RequestUrl {
     private String clientSecret;
     private String method;
     private String para;
+    private String requestType;
+    private String response;
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
 
     public String getUrl() {
         return url;
@@ -64,5 +74,13 @@ public class RequestUrl {
 
     public void setPara(String para) {
         this.para = para;
+    }
+
+    public String getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(String requestType) {
+        this.requestType = requestType;
     }
 }

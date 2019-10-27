@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Manually fetch Demo</title>
+</head>
+
+<body ms-controller="viewmodel">
+<h1>Manually fetch</h1>
+<p>Url: <input id="url"></p>
+<p>clientIdKey: <input id="clientIdKey"></p>
+<p>clientId: <input id="clientId"></p>
+<p>secretKey: <input id="secretKey"></p>
+<p>clientSecret: <input id="clientSecret"></p>
+<p>method: <input id="method"></p>
+<p>para: <input id="para"></p>
+
+
+<button id="printBtn" class="btn btn-info " type="button"><i class="fa fa-trash-o"></i>Submit</button>
+<p>response: <input id="response"></p>
+</body>
+
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script>
+    $("#printBtn").click(function () {
+        var json = {};
+        json.url = $("#url").val();
+        json.clientIdKey = $("#clientIdKey").val();
+        json.clientId = $("#clientId").val();
+        json.secretKey = $("#secretKey").val();
+        json.clientSecret = $("#clientSecret").val();
+        json.method = $("#method").val();
+        json.para = $("#para").val();
+        $.ajax({
+            type: "post",
+            url: "/fetchAPI",
+            contentType: 'application/json; charset=UTF-8',
+            dataType: 'json',
+            data: JSON.stringify(json),
+            success: function (data,status) {
+                $("#response").val(JSON.stringify(data));
+            },
+            error: function (e) {
+                alert(e.message);
+            }
+        });
+    });
+</script>
+</html>

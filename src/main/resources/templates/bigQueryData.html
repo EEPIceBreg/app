@@ -162,7 +162,7 @@
                             <!-- BOX -->
                             <div class="box border green">
                                 <div class="box-title">
-                                    <h4><i class="fa fa-table"></i>Response Data</h4>
+                                    <h4><i class="fa fa-table"></i>client_transactions</h4>
                                     <div class="tools hidden-xs">
 
                                     </div>
@@ -172,17 +172,21 @@
                                            class="datatable table table-striped table-bordered table-hover">
                                         <thead>
                                         <tr>
-                                            <th>Data</th>
+                                            <th>clientId</th>
+                                            <th>transanctionInJson</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr class="gradeX" th:each="resp:${respList}">
-                                            <td th:text="${resp}">&nbsp;</td>
+                                            <td th:text="${resp.clientId}">&nbsp;</td>
+                                            <td th:text="${resp.transanctionInJson}">&nbsp;</td>
+
                                         </tr>
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <th>Data</th>
+                                            <th>clientId</th>
+                                            <th>transanctionInJson</th>
                                         </tr>
                                         </tfoot>
                                     </table>
@@ -194,7 +198,61 @@
                     <!-- /DATA TABLES -->
                     <div class="separator"></div>
                     <!-- TABLE IN MODAL -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- BOX -->
+                            <div class="box border green">
+                                <div class="box-title">
+                                    <h4><i class="fa fa-table"></i>client_id_accessTokens</h4>
+                                    <div class="tools hidden-xs">
 
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <table id="datatable2" cellpadding="0" cellspacing="0" border="0"
+                                           class="datatable table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>clientId</th>
+                                            <th>bankAISP</th>
+                                            <th>accessToken</th>
+                                            <th>refreshToken</th>
+                                            <th>idToken</th>
+                                            <th>tokenType</th>
+                                            <th>expiresIn</th>
+                                            <th>currentTimeStamp</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="gradeX" th:each="token:${respListToken}">
+                                            <td th:text="${token.clientId}">&nbsp;</td>
+                                            <td th:text="${token.bankAISP}">&nbsp;</td>
+                                            <td th:text="${token.accessToken}">&nbsp;</td>
+                                            <td th:text="${token.refreshToken}">&nbsp;</td>
+                                            <td th:text="${token.idToken}">&nbsp;</td>
+                                            <td th:text="${token.tokenType}">&nbsp;</td>
+                                            <td th:text="${token.expiresIn}">&nbsp;</td>
+                                            <td th:text="${token.currentTimeStamp}">&nbsp;</td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th>clientId</th>
+                                            <th>bankAISP</th>
+                                            <th>accessToken</th>
+                                            <th>refreshToken</th>
+                                            <th>idToken</th>
+                                            <th>tokenType</th>
+                                            <th>expiresIn</th>
+                                            <th>currentTimeStamp</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /BOX -->
+                        </div>
+                    </div>
                     <!-- /TABLE IN MODAL -->
                     <!-- SAMPLE BOX CONFIGURATION MODAL FORM-->
 

@@ -9,9 +9,7 @@ import com.google.pubsub.v1.ProjectSubscriptionName;
 import com.google.pubsub.v1.ProjectTopicName;
 import com.google.pubsub.v1.PushConfig;
 import com.google.pubsub.v1.Subscription;
-import com.ice.model.BigqueryModel;
-import com.ice.model.RequestUrl;
-import com.ice.model.SubModel;
+import com.ice.model.*;
 import com.ice.process.ApiFiter;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -108,18 +106,37 @@ public class IndexPage {
         return mv;
     }
 
-    @PostMapping("/bigQueryData")
-    public String getbigQueryData(@ModelAttribute BigqueryModel bigqueryModel, Model model) throws InterruptedException {
+    @RequestMapping("/bigQueryData")
+    public String getbigQueryData(Model model) throws InterruptedException {
         List respList=new ArrayList<String>();
+        List respListToken=new ArrayList<String>();
 
         BigQuery bigquery= BigQueryOptions.getDefaultInstance().getService();
+        String tableName="eep-iceberg-project-257702.iceberg_poc.client_transactions";
         String query="SELECT * '%s' ;";
-        QueryJobConfiguration queryConfig= QueryJobConfiguration.newBuilder(String.format(query, bigqueryModel.getTable())).build();
+        QueryJobConfiguration queryConfig= QueryJobConfiguration.newBuilder(String.format(query, tableName)).build();
         for(FieldValueList row: bigquery.query(queryConfig).iterateAll()){
-            for(FieldValue val:row){
-                respList.add(val.toString());
-            }
+            ClientTrx trx=new ClientTrx();
+            trx.setClientId(row.get("clientId").getStringValue());
+            trx.setTransanctionInJson(row.get("transanctionInJson").getStringValue());
+            respList.add(trx);
         }
+        tableName="eep-iceberg-project-257702.iceberg_poc.client_id_accessTokens";
+        queryConfig= QueryJobConfiguration.newBuilder(String.format(query, tableName)).build();
+        for(FieldValueList row: bigquery.query(queryConfig).iterateAll()){
+            ClientTokens token=new ClientTokens();
+            token.setClientId(row.get("clientId").getStringValue());
+            token.setBankAISP(row.get("bankAISP").getStringValue());
+            token.setAccessToken(row.get("accessToken").getStringValue());
+            token.setRefreshToken(row.get("refreshToken").getStringValue());
+            token.setIdToken(row.get("idToken").getStringValue());
+            token.setTokenType(row.get("tokenType").getStringValue());
+            token.setExpiresIn(row.get("expiresIn").getStringValue());
+            token.setCurrentTimeStamp(row.get("currentTimestamp").getStringValue());
+            respListToken.add(token);
+        }
+
+        model.addAttribute("respListToken",respListToken);
         model.addAttribute("respList",respList);
         return "bigQueryData";
     }
@@ -142,6 +159,4 @@ public class IndexPage {
         }
         return apiList;
     }
-
-
 }

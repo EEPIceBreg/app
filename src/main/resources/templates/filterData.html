@@ -101,7 +101,6 @@
                     <ul class="sub">
                         <li class="current"><a class="" href="bigQueryData"><span class="sub-menu-text">Client Transactions</span></a></li>
                         <li class="current"><a class="" href="filterData"><span class="sub-menu-text">filterData</span></a>
-
                         </li>
                     </ul>
                 </li>
@@ -164,7 +163,7 @@
                             <!-- BOX -->
                             <div class="box border green">
                                 <div class="box-title">
-                                    <h4><i class="fa fa-table"></i>client_transactions</h4>
+                                    <h4><i class="fa fa-table"></i>FilterConfig</h4>
                                     <div class="tools hidden-xs">
 
                                     </div>
@@ -174,21 +173,23 @@
                                            class="datatable table table-striped table-bordered table-hover">
                                         <thead>
                                         <tr>
-                                            <th>clientId</th>
-                                            <th>transanctionInJson</th>
+                                            <th>bankAISP</th>
+                                            <th>filter_Path</th>
+                                            <th>filter_Table_Schema</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr class="gradeX" th:each="resp:${respList}">
-                                            <td th:text="${resp.clientId}">&nbsp;</td>
-                                            <td th:text="${resp.transanctionInJson}">&nbsp;</td>
-
+                                            <td th:text="${resp.bankAISP}">&nbsp;</td>
+                                            <td th:text="${resp.filter_Path}">&nbsp;</td>
+                                            <td th:text="${resp.filter_Table_Schema}">&nbsp;</td>
                                         </tr>
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <th>clientId</th>
-                                            <th>transanctionInJson</th>
+                                            <th>bankAISP</th>
+                                            <th>filter_Path</th>
+                                            <th>filter_Table_Schema</th>
                                         </tr>
                                         </tfoot>
                                     </table>
@@ -205,7 +206,7 @@
                             <!-- BOX -->
                             <div class="box border green">
                                 <div class="box-title">
-                                    <h4><i class="fa fa-table"></i>client_id_accessTokens</h4>
+                                    <h4><i class="fa fa-table"></i>transaction filtered</h4>
                                     <div class="tools hidden-xs">
 
                                     </div>
@@ -216,37 +217,37 @@
                                         <thead>
                                         <tr>
                                             <th>clientId</th>
-                                            <th>bankAISP</th>
-                                            <th>accessToken</th>
-                                            <th>refreshToken</th>
-                                            <th>idToken</th>
-                                            <th>tokenType</th>
-                                            <th>expiresIn</th>
-                                            <th>currentTimeStamp</th>
+                                            <th>creditDebitIndicator</th>
+                                            <th>status</th>
+                                            <th>bookingDateTime</th>
+                                            <th>accountId</th>
+                                            <th>amountAmount</th>
+                                            <th>amountCurrency</th>
+                                            <th>TransactionInformation</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr class="gradeX" th:each="token:${respListToken}">
                                             <td th:text="${token.clientId}">&nbsp;</td>
-                                            <td th:text="${token.bankAISP}">&nbsp;</td>
-                                            <td th:text="${token.accessToken}">&nbsp;</td>
-                                            <td th:text="${token.refreshToken}">&nbsp;</td>
-                                            <td th:text="${token.idToken}">&nbsp;</td>
-                                            <td th:text="${token.tokenType}">&nbsp;</td>
-                                            <td th:text="${token.expiresIn}">&nbsp;</td>
-                                            <td th:text="${token.currentTimeStamp}">&nbsp;</td>
+                                            <td th:text="${token.creditDebitIndicator}">&nbsp;</td>
+                                            <td th:text="${token.status}">&nbsp;</td>
+                                            <td th:text="${token.bookingDateTime}">&nbsp;</td>
+                                            <td th:text="${token.accountId}">&nbsp;</td>
+                                            <td th:text="${token.amountAmount}">&nbsp;</td>
+                                            <td th:text="${token.amountCurrency}">&nbsp;</td>
+                                            <td th:text="${token.TransactionInformation}">&nbsp;</td>
                                         </tr>
                                         </tbody>
                                         <tfoot>
                                         <tr>
                                             <th>clientId</th>
-                                            <th>bankAISP</th>
-                                            <th>accessToken</th>
-                                            <th>refreshToken</th>
-                                            <th>idToken</th>
-                                            <th>tokenType</th>
-                                            <th>expiresIn</th>
-                                            <th>currentTimeStamp</th>
+                                            <th>creditDebitIndicator</th>
+                                            <th>status</th>
+                                            <th>bookingDateTime</th>
+                                            <th>accountId</th>
+                                            <th>amountAmount</th>
+                                            <th>amountCurrency</th>
+                                            <th>TransactionInformation</th>
                                         </tr>
                                         </tfoot>
                                     </table>

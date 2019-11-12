@@ -141,6 +141,43 @@ public class IndexPage {
         return "bigQueryData";
     }
 
+    @RequestMapping("/filterData")
+    public String getfilterData(Model model) throws InterruptedException {
+        List respList=new ArrayList<String>();
+        List respListToken=new ArrayList<String>();
+
+        BigQuery bigquery= BigQueryOptions.getDefaultInstance().getService();
+        String tableName="eep-iceberg-project-257702.iceberg_poc.client_transaction_filter_config";
+        String query="SELECT * '%s' ;";
+        QueryJobConfiguration queryConfig= QueryJobConfiguration.newBuilder(String.format(query, tableName)).build();
+        for(FieldValueList row: bigquery.query(queryConfig).iterateAll()){
+            FilterConfig config=new FilterConfig();
+            config.setBankAISP(row.get("bankAISP").getStringValue());
+            config.setFilter_Path(row.get("filter_Path").getStringValue());
+            config.setFilter_Table_Schema(row.get("filter_Table_Schema").getStringValue());
+            respList.add(config);
+        }
+        tableName="eep-iceberg-project-257702.iceberg_poc.client_transaction_filtered";
+        queryConfig= QueryJobConfiguration.newBuilder(String.format(query, tableName)).build();
+        for(FieldValueList row: bigquery.query(queryConfig).iterateAll()){
+            Filtered filtered=new Filtered();
+            filtered.setClientId(row.get("clientId").getStringValue());
+            filtered.setCreditDebitIndicator(row.get("CreditDebitIndicator").getStringValue());
+            filtered.setStatus(row.get("Status").getStringValue());
+            filtered.setBookingDateTime(row.get("BookingDateTime").getStringValue());
+            filtered.setAccountId(row.get("accountId").getStringValue());
+            filtered.setAmountAmount(row.get("amount.Amount").getStringValue());
+            filtered.setAmountCurrency(row.get("amount.currency").getStringValue());
+            filtered.setTransactionInformation(row.get("TransactionInformation").getStringValue());
+
+            respListToken.add(filtered);
+        }
+
+        model.addAttribute("respListToken",respListToken);
+        model.addAttribute("respList",respList);
+        return "filterData";
+    }
+
     @RequestMapping("/test")
     @ResponseBody
     public String test() {
